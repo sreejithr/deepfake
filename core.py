@@ -2,6 +2,7 @@ import cv2
 import torch
 import yaml
 import imageio
+import throttle
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -79,6 +80,7 @@ def load_checkpoints(config_path, checkpoint_path, cpu=False):
 
     return generator, kp_detector
 
+@throttle.wrap(1, 2)
 def forward(source_image, driving_frame, kp_source, kp_driving_initial, generator, kp_detector, relative=True, adapt_scale=True, cpu=True):
   kp_driving = kp_detector(driving_frame)
   kp_norm = normalize_kp(
@@ -150,7 +152,7 @@ if __name__ == "__main__":
       adapt_scale=opt.adapt_scale,
       cpu=opt.cpu   
     )
-    cv2.imshow("frame", resized)
+    cv2.imshow("frame", fake_frame)
 
     #x = np.squeeze(driving_resized, axis=(0,))
     #x = driving_resized[0].permute(1, 2, 0)
