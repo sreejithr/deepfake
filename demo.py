@@ -62,6 +62,9 @@ def make_animation(source_image, driving_video, generator, kp_detector, relative
             source = source.cuda()
         driving = torch.tensor(np.array(driving_video)[np.newaxis].astype(np.float32)).permute(0, 4, 1, 2, 3)
         kp_source = kp_detector(source)
+        print(driving.shape)
+        print(driving[:, :, 0])
+        print("\n\n")
         kp_driving_initial = kp_detector(driving[:, :, 0])
 
         for frame_idx in tqdm(range(driving.shape[2])):
@@ -119,9 +122,8 @@ if __name__ == "__main__":
 
     parser.add_argument("--best_frame", dest="best_frame", type=int, default=None,  
                         help="Set frame to start from.")
- 
+
     parser.add_argument("--cpu", dest="cpu", action="store_true", help="cpu mode.")
- 
 
     parser.set_defaults(relative=False)
     parser.set_defaults(adapt_scale=False)
@@ -152,6 +154,5 @@ if __name__ == "__main__":
         predictions_backward = make_animation(source_image, driving_backward, generator, kp_detector, relative=opt.relative, adapt_movement_scale=opt.adapt_scale, cpu=opt.cpu)
         predictions = predictions_backward[::-1] + predictions_forward[1:]
     else:
-        predictions = make_animation(source_image, driving_video, generator, kp_detector, relative=opt.relative, adapt_movement_scale=opt.adapt_scale, cpu=opt.cpu)
+        predictions = make_animation(source_image, driving_video[1:2], generator, kp_detector, relative=opt.relative, adapt_movement_scale=opt.adapt_scale, cpu=opt.cpu)
     imageio.mimsave(opt.result_video, [img_as_ubyte(frame) for frame in predictions], fps=fps)
-

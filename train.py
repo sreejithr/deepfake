@@ -1,16 +1,12 @@
-from tqdm import trange
 import torch
 
-from torch.utils.data import DataLoader
-
 from logger import Logger
-from modules.model import GeneratorFullModel, DiscriminatorFullModel
-
+from tqdm import trange
+from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import MultiStepLR
-
 from sync_batchnorm import DataParallelWithCallback
-
 from frames_dataset import DatasetRepeater
+from modules.model import GeneratorFullModel, DiscriminatorFullModel
 
 
 def train(config, generator, discriminator, kp_detector, checkpoint, log_dir, dataset, device_ids):
