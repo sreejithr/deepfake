@@ -28,7 +28,7 @@ prompt-toolkit==3.0.5
 ptyprocess==0.6.0
 pycparser==2.18
 pygit==0.1
-Pygments==2.6.1
+Pygments==2.7.4
 pylint==2.5.3
 pyparsing==2.2.0
 python-dateutil==2.7.3
