@@ -4,7 +4,7 @@ backcall==0.2.0
 cffi==1.11.5
 cloudpickle==0.5.3
 cycler==0.10.0
-dask==0.18.2
+dask==2021.10.0
 decorator==4.3.0
 imageio==2.3.0
 imagezmq==1.1.1
