@@ -17,7 +17,7 @@ lazy-object-proxy==1.4.3
 matplotlib==2.2.2
 mccabe==0.6.1
 networkx==2.1
-numpy==1.15.0
+numpy==1.22.0
 opencv-python==4.3.0.36
 pandas==0.23.4
 parso==0.7.1
